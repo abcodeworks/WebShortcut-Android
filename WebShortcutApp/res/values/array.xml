@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="shortcut_types">
+        <item>URL</item>
+    </string-array>
+    
+    <string-array name="shortcut_type_classes">
+        <item>com.abcodeworks.webshortcutapp</item>
+    </string-array>
+</resources>

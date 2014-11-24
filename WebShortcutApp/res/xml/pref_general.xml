@@ -1,0 +1,24 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_enable_create_shortcut"
+        android:title="@string/pref_enable_create_shortcut_title"
+        android:summary="@string/pref_enable_create_shortcut_summary" />
+    
+    <ListPreference 
+       android:key="pref_create_shortcut_type"
+       android:title="pref_create_shortcut_type_title"
+       android:entries="@array/shortcut_types"
+       android:entryValues="@array/shortcut_type_classes"/>
+    
+    <Preference
+        android:key="homepage"
+        android:title="@string/pref_homepage_title" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_homepage_url" >
+        </intent>
+    </Preference>
+
+</PreferenceScreen>

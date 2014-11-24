@@ -1,5 +1,8 @@
 <resources>
 
     <string name="app_name">Web Shortcut</string>
+    <string name="title_open_shortcut">webshortcut</string>
+    <string name="title_share_shortcut">Create Shortcut</string>
+    <string name="msg_no_app_for_share">There are no applications installed to share with.</string>
 
 </resources>
