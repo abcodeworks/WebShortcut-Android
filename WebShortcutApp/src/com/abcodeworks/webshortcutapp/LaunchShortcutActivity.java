@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 abstract public class LaunchShortcutActivity extends Activity {
@@ -16,6 +17,8 @@ abstract public class LaunchShortcutActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 		
 		Intent intent = getIntent();
 		Log.i("WebShortcut", "In Activity");

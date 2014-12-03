@@ -3,14 +3,13 @@ package com.abcodeworks.webshortcutapp;
 import java.io.File;
 import com.abcodeworks.webshortcututil.write.ShortcutWriter;
 import com.abcodeworks.webshortcututil.write.UrlShortcutWriter;
-import com.abcodeworks.webshortcututil.write.WeblocBinaryShortcutWriter;
-import com.abcodeworks.webshortcututil.write.WeblocXmlShortcutWriter;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,6 +20,8 @@ public class CreateShortcutActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 
 		Intent intent = getIntent();
 		Log.i("WebShortcut", "In Activity");
@@ -39,7 +40,7 @@ public class CreateShortcutActivity extends Activity {
 		    	
 		    	ShortcutWriter writer = new UrlShortcutWriter();
 		    	String name = extras.getString(Intent.EXTRA_SUBJECT);
-		    	String filename = writer.createFilename(name);
+		    	String filename = writer.createFullFilename(name);
 		    	String url = extras.getString(Intent.EXTRA_TEXT);
 		    	File shortcutFile = new File(shortcutDir, filename);
 		    	shortcutFile.delete();
