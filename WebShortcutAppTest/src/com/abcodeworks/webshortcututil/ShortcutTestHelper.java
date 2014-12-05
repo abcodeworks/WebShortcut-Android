@@ -19,7 +19,7 @@ import com.abcodeworks.webshortcututil.write.ShortcutWriter;
 public class ShortcutTestHelper extends TestCase {
     static public InputStream getTestStream(String path, String filename) throws IOException
     {
-        String resourcePath = File.separator + path + File.separator + filename;
+        String resourcePath = File.separator + "assets" + File.separator + path + File.separator + filename;
         
         URL resourceUrl = ShortcutTestHelper.class.getResource(resourcePath);
         if(resourceUrl == null) {
