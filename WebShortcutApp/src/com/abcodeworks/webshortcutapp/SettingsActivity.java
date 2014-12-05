@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -47,7 +48,8 @@ import android.preference.PreferenceManager;
 public class SettingsActivity extends PreferenceActivity
                 implements Preference.OnPreferenceChangeListener
 {
-        protected Preference enableLaunchUnknownShortcutPref = null;
+        protected Preference enableLaunchUnknownShortcutPref = null,
+        		             defaultCreateShortcutTypePref = null;
         
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -76,6 +78,11 @@ public class SettingsActivity extends PreferenceActivity
                 
                 enableLaunchUnknownShortcutPref = findPreference(getString(R.string.pref_enable_launch_unknown_shortcut));
                 enableLaunchUnknownShortcutPref.setOnPreferenceChangeListener(this);
+                
+                defaultCreateShortcutTypePref = findPreference(getString(R.string.pref_default_create_shortcut_type));
+                defaultCreateShortcutTypePref.setOnPreferenceChangeListener(this);
+                ListPreference listPref = (ListPreference)defaultCreateShortcutTypePref;
+                listPref.setSummary(listPref.getEntry());
         }
 
 
@@ -85,16 +92,23 @@ public class SettingsActivity extends PreferenceActivity
          */
         public boolean onPreferenceChange(Preference preference, Object newValue)
         {
-                if(preference == enableLaunchUnknownShortcutPref) {
-                	    Boolean enable = (Boolean) newValue;
-                	    Boolean invEnable = Boolean.valueOf(!enable.booleanValue());
-                	    setActivityEnabled(LaunchUnknownShortcutActivity.class, enable);
-                	    setActivityEnabled(LaunchUrlShortcutActivity.class, invEnable);
-                	    setActivityEnabled(LaunchWebsiteShortcutActivity.class, invEnable);
-                	    setActivityEnabled(LaunchDesktopShortcutActivity.class, invEnable);
-                	    setActivityEnabled(LaunchWeblocShortcutActivity.class, invEnable);
-                }
-
+            if(preference == enableLaunchUnknownShortcutPref) {
+                Boolean enable = (Boolean) newValue;
+                Boolean invEnable = Boolean.valueOf(!enable.booleanValue());
+                setActivityEnabled(LaunchUnknownShortcutActivity.class, enable);
+                setActivityEnabled(LaunchUrlShortcutActivity.class, invEnable);
+                setActivityEnabled(LaunchWebsiteShortcutActivity.class, invEnable);
+                setActivityEnabled(LaunchDesktopShortcutActivity.class, invEnable);
+                setActivityEnabled(LaunchWeblocShortcutActivity.class, invEnable);
+            } else if(preference == defaultCreateShortcutTypePref) {
+            	// This could probably be cleaner.  Should we be using
+            	// onSharedPreferenceChanged instead?
+            	CharSequence newKey = (CharSequence)newValue;
+            	ListPreference listPref = (ListPreference)defaultCreateShortcutTypePref;
+            	int index = listPref.findIndexOfValue(newKey.toString());
+            	CharSequence[] titles = listPref.getEntries();
+            	listPref.setSummary(titles[index].toString());
+            }
 
             return true;
         }

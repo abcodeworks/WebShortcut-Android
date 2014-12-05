@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string-array name="shortcut_type_titles">
-        <item>URL</item>
-        <item>Desktop</item>
-        <item>Webloc</item>
+        <item>Windows (.url)</item>
+        <item>Linux (.desktop)</item>
+        <item>Apple (.webloc)</item>
     </string-array>
     
     <string-array name="shortcut_type_keys">

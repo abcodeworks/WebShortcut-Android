@@ -123,7 +123,7 @@
 			    <data android:mimeType="*/*" />
   			</intent-filter>
         </activity>
-        <!--activity
+        <activity
             android:name="com.abcodeworks.webshortcutapp.CreateShortcutActivity"
             android:label="@string/title_share_shortcut" >
             <intent-filter>
@@ -132,9 +132,9 @@
 			    <data android:mimeType="text/plain" />
   			</intent-filter>
         </activity>
-        <provider android:name="CachedFileProvider" android:authorities="com.abcodeworks.webshortcutapp.provider" android:grantUriPermissions="true"-->
+        <provider android:name="CachedFileProvider" android:authorities="com.abcodeworks.webshortcutapp.provider" android:grantUriPermissions="true">
              <!--grant-uri-permission android:pathPattern="/" /-->
-        <!--</provider>-->
+        </provider>
     </application>
 
 </manifest>

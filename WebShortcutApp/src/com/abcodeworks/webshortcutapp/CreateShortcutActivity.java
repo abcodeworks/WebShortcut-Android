@@ -1,12 +1,16 @@
 package com.abcodeworks.webshortcutapp;
 
 import java.io.File;
+
+import com.abcodeworks.webshortcututil.write.DesktopShortcutWriter;
 import com.abcodeworks.webshortcututil.write.ShortcutWriter;
 import com.abcodeworks.webshortcututil.write.UrlShortcutWriter;
+import com.abcodeworks.webshortcututil.write.WeblocBinaryShortcutWriter;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -32,13 +36,33 @@ public class CreateShortcutActivity extends Activity {
 		    	Log.i("WebShortcut", "received TEXT: " + extras.getString(Intent.EXTRA_TEXT));
 		    	Log.i("WebShortcut", "received SUBJECT: " + extras.getString(Intent.EXTRA_SUBJECT));
 		    	
+		    	
 		    	File cacheDir = getCacheDir();
 		    	File shortcutDir = new File(cacheDir, "shareshortcuts");
 		    	shortcutDir.mkdir();
 		    	
 		    	// Clean cache
 		    	
-		    	ShortcutWriter writer = new UrlShortcutWriter();
+		    	
+		    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		    	String shortcutType = prefs.getString(getString(R.string.pref_default_create_shortcut_type), null);
+		    	//System.out.println(shortcutType);
+		    	
+		    	String mimeType = null;
+		    	ShortcutWriter writer = null;
+		    	if(shortcutType.equals("url")) {
+		    		mimeType = "text/x-url";
+		    		writer = new UrlShortcutWriter();
+		    	} else if(shortcutType.equals("desktop")) {
+		    		mimeType = "application/octet-stream";
+		    		writer = new DesktopShortcutWriter();
+		    	} else if(shortcutType.equals("webloc")) {
+		    		mimeType = "application/octet-stream";
+		    		writer = new WeblocBinaryShortcutWriter();
+		    	} else {
+		    		throw new Exception("Invalid preference value");
+		    	}
+		    	
 		    	String name = extras.getString(Intent.EXTRA_SUBJECT);
 		    	String filename = writer.createFullFilename(name);
 		    	String url = extras.getString(Intent.EXTRA_TEXT);
@@ -55,7 +79,7 @@ public class CreateShortcutActivity extends Activity {
 		                    Uri.parse("content://" + CachedFileProvider.AUTHORITY + "/shareshortcuts/" + filename));
 
 		    	//sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(shortcutFile));
-		    	sendIntent.setType("application/octet-stream");
+		    	sendIntent.setType(mimeType);
 		    	Toast.makeText(this, "content://" + CachedFileProvider.AUTHORITY + "/"
                         + filename, Toast.LENGTH_LONG).show();
 		    	Log.i("webshortcut", "content://" + CachedFileProvider.AUTHORITY + "/"
