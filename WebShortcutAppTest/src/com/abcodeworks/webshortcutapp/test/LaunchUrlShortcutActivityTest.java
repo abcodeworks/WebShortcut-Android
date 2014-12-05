@@ -8,14 +8,16 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity;
 
-public class LaunchUrlShortcutActivityTest extends ActivityInstrumentationTestCase2<LaunchUrlShortcutActivity> {
+public class LaunchUrlShortcutActivityTest extends ActivityUnitTestCase<LaunchUrlShortcutActivity> {
 	public LaunchUrlShortcutActivityTest() {
 		super(LaunchUrlShortcutActivity.class);
 		
@@ -48,26 +50,17 @@ public class LaunchUrlShortcutActivityTest extends ActivityInstrumentationTestCa
     	intent.setAction(Intent.ACTION_VIEW);
     	intent.setDataAndType(Uri.parse(uri), type);
     	
-    	setActivityInitialTouchMode(true);
-    	setActivityIntent(intent);
-    	activity = getActivity();
+    	startActivity(intent, null, null);
     	
-
+    	AssetManager assetManager = getInstrumentation().getTargetContext().getResources().getAssets();
+    	ParcelFileDescriptor pfd = ParcelFileDescriptor.open(new File(
+                fileLocation), ParcelFileDescriptor.MODE_READ_ONLY);
     	
-    	// testReadShortcut(reader, CHROME_PATH, "Google.url", "Google", "https://www.google.com/");
-    	
-
-
-    	//startActivity(intent, null, null);
-    	
-    	//Intent shareIntent = getStartedActivityIntent();
+    	Intent shareIntent = getStartedActivityIntent();
     	assertEquals(Intent.ACTION_SEND, shareIntent.getAction());
     	String sharedUri = shareIntent.getExtras().get(Intent.EXTRA_STREAM).toString();
     	assertEquals(uri, sharedUri);
     	assertNull(shareIntent.getData());
-        assertEquals(type, shareIntent.getType());*/
-    	assertTrue(true);
-        
-        setActivity(null);   // forces next call of getActivity to re-open the activity
+        assertEquals(type, shareIntent.getType());
     }
 }
