@@ -23,7 +23,8 @@
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity"
-            android:label="@string/title_open_shortcut" >
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
@@ -49,7 +50,8 @@
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWebsiteShortcutActivity"
-            android:label="@string/title_open_shortcut" >
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
@@ -75,7 +77,8 @@
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchDesktopShortcutActivity"
-            android:label="@string/title_open_shortcut" >
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
@@ -95,7 +98,8 @@
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity"
-            android:label="@string/title_open_shortcut" >
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
@@ -116,7 +120,8 @@
         <activity
             android:enabled="false"
             android:name="com.abcodeworks.webshortcutapp.LaunchUnknownShortcutActivity"
-            android:label="@string/title_open_shortcut" >
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
@@ -125,7 +130,8 @@
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.CreateShortcutActivity"
-            android:label="@string/title_share_shortcut" >
+            android:label="@string/title_share_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
 			    <action android:name="android.intent.action.SEND" />
 			    <category android:name="android.intent.category.DEFAULT" />
