@@ -46,25 +46,20 @@
 			    <data android:pathPattern=".*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.url"/>
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
 			    <data android:host="*" />
   			</intent-filter>
-  			            <intent-filter>
+            <intent-filter>
 			    <action android:name="android.intent.action.VIEW" />
 			    <category android:name="android.intent.category.DEFAULT" />
 			    <data android:mimeType="text/x-url" />
-			    <data android:scheme="file" />
+			    <!--data android:scheme="file" />-->
 			    <data android:host="*" />
   			</intent-filter>
         </activity>
-        <!--activity
+        <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWebsiteShortcutActivity"
             android:label="@string/title_open_shortcut" >
             <intent-filter>
@@ -72,9 +67,43 @@
 			    <category android:name="android.intent.category.DEFAULT" />
 			    <data android:mimeType="*/*" />
 			    <data android:scheme="file" />
+			    <!-- See http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
 			    <data android:pathPattern=".*\\.website" />
+			    <data android:pathPattern=".*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.website"/>
 			    <data android:host="*" />
   			</intent-filter>
+  			<intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="application/x-mswebsite" />
+			    <!--data android:scheme="file" />-->
+			    <data android:host="*" />
+  			</intent-filter>
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.LaunchDesktopShortcutActivity"
+            android:label="@string/title_open_shortcut" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+			    <data android:scheme="file" />
+			    <!-- See http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
+			    <data android:pathPattern=".*\\.desktop" />
+			    <data android:pathPattern=".*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+			    <data android:host="*" />
+  			</intent-filter>
+  			<!-- I do not know of any MIME type for desktop files -->
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity"
@@ -84,11 +113,19 @@
 			    <category android:name="android.intent.category.DEFAULT" />
 			    <data android:mimeType="*/*" />
 			    <data android:scheme="file" />
+			    <!-- See http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
 			    <data android:pathPattern=".*\\.webloc" />
+			    <data android:pathPattern=".*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
 			    <data android:host="*" />
   			</intent-filter>
+  			<!-- I do not know of any MIME type for webloc files -->
         </activity>
-        <activity
+        <!--activity
             android:name="com.abcodeworks.webshortcutapp.CreateShortcutActivity"
             android:label="@string/title_share_shortcut" >
             <intent-filter>

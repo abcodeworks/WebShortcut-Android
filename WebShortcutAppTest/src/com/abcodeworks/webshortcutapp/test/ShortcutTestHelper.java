@@ -28,12 +28,11 @@ public class ShortcutTestHelper {
             String activityPackageName = activityInfo.packageName;
             String activityName = activityInfo.name;
             System.out.println("Activity "+activityPackageName + "/" + activityName);
-            if(activityInfo.name.equals(LaunchUrlShortcutActivity.class.getName())) {
+            if(activityInfo.name.equals(activityClass.getName())) {
             	found = true;
             }
         }
         
-        System.out.println(LaunchUrlShortcutActivity.class.getName());
         return found;
 	}
 }
