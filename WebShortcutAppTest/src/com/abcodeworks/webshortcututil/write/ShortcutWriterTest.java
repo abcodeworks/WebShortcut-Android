@@ -40,6 +40,22 @@ public class ShortcutWriterTest {
     @Rule
     public ExpectedException thrown= ExpectedException.none();
     
+    void testCreateFilename(ShortcutWriter writer, String expectedBase, String expectedExtension, String name)
+    {
+        String expectedFull = expectedBase + "." + expectedExtension;
+        
+        assertEquals(expectedBase, writer.createBaseFilename(name));
+        assertEquals(expectedFull, writer.createFullFilename(name));
+    }
+    
+    void testCreateFilename(ShortcutWriter writer, String expectedBase, String expectedExtension, String name, int length)
+    {
+        String expectedFull = expectedBase + "." + expectedExtension;
+        
+        assertEquals(expectedBase, writer.createBaseFilename(name, length));
+        assertEquals(expectedFull, writer.createFullFilename(name, length));
+    }
+    
     @Test
     public void testCreateFilename()
     {
@@ -48,26 +64,55 @@ public class ShortcutWriterTest {
         ShortcutWriter weblocBinWriter = new WeblocBinaryShortcutWriter();
         ShortcutWriter weblocXmlWriter = new WeblocXmlShortcutWriter();
         
-        assertEquals("Generate desktop filename", "file.desktop", desktopWriter.createFilename("file"));
-        assertEquals("Generate url filename", "file.url", urlWriter.createFilename("file"));
-        assertEquals("Generate binary webloc filename", "file.webloc", weblocBinWriter.createFilename("file"));
-        assertEquals("Generate xml webloc filename", "file.webloc", weblocXmlWriter.createFilename("file"));
+        //Generate desktop filename
+        testCreateFilename(desktopWriter, "file", "desktop", "file");
         
-        assertEquals("Generate truncated filename", "f.desktop", desktopWriter.createFilename("file", 9));
-        assertEquals("Generate max truncated filename", "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012.desktop", desktopWriter.createFilename("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"));
-        assertEquals("Generate minimum undef filename", "_.desktop", desktopWriter.createFilename(null, 9));
-        assertEquals("Generate minimum undef filename", "_.desktop", desktopWriter.createFilename("", 9));
-        assertEquals("Generate filename allowed special characters", " !#$&'()+,-.09;=@AZ[]_`az{}~中.desktop", desktopWriter.createFilename(" !#$&'()+,-.09;=@AZ[]_`az{}~中"));
-        assertEquals("Generate filename all characters", " !#$&'()+,-.09;=@AZ[]_`az{}~中.desktop", desktopWriter.createFilename(" !\"#$%&'()*+,-./09:;<=>?@AZ[\\]^_`az{|}~中"));
+        //Generate url filename
+        testCreateFilename(urlWriter, "file", "url", "file");
+        
+        //Generate binary webloc filename
+        testCreateFilename(weblocBinWriter, "file", "webloc", "file");
+        
+        //Generate xml webloc filename
+        testCreateFilename(weblocXmlWriter, "file", "webloc", "file");
+        
+        
+        //Generate truncated filename
+        testCreateFilename(desktopWriter, "f", "desktop", "file", 9);
+        
+        //Generate max truncated filename
+        testCreateFilename(desktopWriter, "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012", "desktop", "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+        
+        //Generate minimum undef filename
+        testCreateFilename(desktopWriter, "_", "desktop", null, 9);
+        
+        //Generate minimum undef filename
+        testCreateFilename(desktopWriter, "_", "desktop", "", 9);
+        
+        //Generate filename allowed special characters
+        testCreateFilename(desktopWriter, " !#$&'()+,-.09;=@AZ[]_`az{}~中", "desktop", " !#$&'()+,-.09;=@AZ[]_`az{}~中");
+        
+        //Generate filename all characters
+        testCreateFilename(desktopWriter, " !#$&'()+,-.09;=@AZ[]_`az{}~中", "desktop", " !\"#$%&'()*+,-./09:;<=>?@AZ[\\]^_`az{|}~中");
     }
     
     @Test
-    public void testCreateFilenameTooShort()
+    public void testCreateBaseFilenameTooShort()
             throws FileNotFoundException,
                    ShortcutReadException,
                    IOException {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("maxLength must be greater than or equal to 9");
-        (new DesktopShortcutWriter()).createFilename("file", 8);
+        (new DesktopShortcutWriter()).createBaseFilename("file", 8);
+    }
+    
+    @Test
+    public void testCreateFullFilenameTooShort()
+            throws FileNotFoundException,
+                   ShortcutReadException,
+                   IOException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("maxLength must be greater than or equal to 9");
+        (new DesktopShortcutWriter()).createFullFilename("file", 8);
     }
 }

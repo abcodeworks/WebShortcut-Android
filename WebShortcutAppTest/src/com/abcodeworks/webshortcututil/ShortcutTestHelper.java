@@ -48,7 +48,7 @@ public class ShortcutTestHelper {
     static public void testWriteShortcut(ShortcutWriter writer, File path, String name, String url)
             throws IOException, ShortcutReadException, FileAlreadyExistsException, ShortcutWriteException
     {
-        String filename = writer.createFilename(name);
+        String filename = writer.createFullFilename(name);
         File fullFilename = new File(path, filename);
         writer.write(fullFilename, name, url); 
         ShortcutContents contents = ShortcutReadUtil.read(fullFilename);
