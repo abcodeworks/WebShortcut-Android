@@ -25,23 +25,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.abcodeworks.webshortcututil.read.ShortcutReadException;
 import com.abcodeworks.webshortcututil.read.ShortcutReadUtil;
 
 import static com.abcodeworks.webshortcututil.ShortcutTestHelper.getTestStream;
 
-import static org.junit.Assert.*;
-
-public class ShortcutReadUtilTest
+public class ShortcutReadUtilTest extends AndroidTestCase
 {
-    @Rule
-    public ExpectedException thrown= ExpectedException.none();
-    
-    @Test
+    @SmallTest
     public void testHasValidExtension()
     {
         assertTrue("Valid extention .desktop", ShortcutReadUtil.hasValidExtension(new File("file.desktop")));
@@ -58,43 +52,5 @@ public class ShortcutReadUtilTest
         assertFalse("Invalid no extension", ShortcutReadUtil.hasValidExtension(new File("file")));
         assertFalse("Invalid no extension (with dot)", ShortcutReadUtil.hasValidExtension(new File("file.")));
         assertFalse("Invalid extension multiple dots", ShortcutReadUtil.hasValidExtension(new File("file.misleading.badextension")));
-    }
-    
-
-    
-    @Test(expected=FileNotFoundException.class)
-    public void testReadFileMissingDesktopFile()
-            throws FileNotFoundException,
-                   ShortcutReadException,
-                   IOException {
-        ShortcutReadUtil.readUrlString(new File("bad_file.desktop"));
-    }
-    
-    @Test(expected=FileNotFoundException.class)
-    public void testReadFileMissingUrlFile()
-            throws FileNotFoundException,
-                   ShortcutReadException,
-                   IOException {
-        ShortcutReadUtil.readUrlString(new File("bad_file.url"));
-    }
-    
-    @Test
-    public void testReadFileBadExtension()
-            throws FileNotFoundException,
-                   ShortcutReadException,
-                   IOException {
-        thrown.expect(ShortcutReadException.class);
-        thrown.expectMessage("Invalid file extension");
-        ShortcutReadUtil.readUrlString(new File("file.badextension"));
-    }
-    
-    @Test
-    public void testReadFileNotAshortcut()
-            throws FileNotFoundException,
-                   ShortcutReadException,
-                   IOException {
-        thrown.expect(ShortcutReadException.class);
-        thrown.expectMessage("The shortcut is not recognized as a known type");
-        ShortcutReadUtil.readUrlStringTrialAndError(getTestStream(".", "NotAShortcut.txt"));
     }
 }
