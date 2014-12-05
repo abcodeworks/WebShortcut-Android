@@ -1,5 +1,6 @@
 package com.abcodeworks.webshortcutapp.test;
 
+import java.io.File;
 import java.util.List;
 
 import android.content.Intent;
@@ -17,7 +18,14 @@ import com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity;
 public class LaunchUrlShortcutActivityTest extends ActivityInstrumentationTestCase2<LaunchUrlShortcutActivity> {
 	public LaunchUrlShortcutActivityTest() {
 		super(LaunchUrlShortcutActivity.class);
+		
 	}
+	
+	final String
+    	CHROME_PATH =   "samples" + File.separator + "real" + File.separator + "url" + File.separator + "Chrome",
+    	FIREFOX_PATH =  "samples" + File.separator + "real" + File.separator + "url" + File.separator + "Firefox",
+    	IE_PATH =       "samples" + File.separator + "real" + File.separator + "url" + File.separator + "IE",
+    	FAKE_PATH =     "samples" + File.separator + "fake" + File.separator + "url";
 	
 	LaunchUrlShortcutActivity activity;
     
@@ -31,22 +39,35 @@ public class LaunchUrlShortcutActivityTest extends ActivityInstrumentationTestCa
 	
     @SmallTest
     public void testSampleUrls() {
+    	// Borrowed code from http://stackoverflow.com/questions/5708630/how-can-i-automate-a-test-that-sends-multiple-mock-intents-to-an-android-activit
     	
-    	String uri = "file://dummypath/dummyfile.txt";
+    	String uri = "file://" + CHROME_PATH + "/Google.url";
     	String type = "text/plain";
     	
-    	/*Intent intent = new Intent();
+    	Intent intent = new Intent();
     	intent.setAction(Intent.ACTION_VIEW);
     	intent.setDataAndType(Uri.parse(uri), type);
-
-    	startActivity(viewIntent, null, null);
     	
-    	Intent shareIntent = getStartedActivityIntent();
+    	setActivityInitialTouchMode(true);
+    	setActivityIntent(intent);
+    	activity = getActivity();
+    	
+
+    	
+    	// testReadShortcut(reader, CHROME_PATH, "Google.url", "Google", "https://www.google.com/");
+    	
+
+
+    	//startActivity(intent, null, null);
+    	
+    	//Intent shareIntent = getStartedActivityIntent();
     	assertEquals(Intent.ACTION_SEND, shareIntent.getAction());
     	String sharedUri = shareIntent.getExtras().get(Intent.EXTRA_STREAM).toString();
     	assertEquals(uri, sharedUri);
     	assertNull(shareIntent.getData());
         assertEquals(type, shareIntent.getType());*/
     	assertTrue(true);
+        
+        setActivity(null);   // forces next call of getActivity to re-open the activity
     }
 }
