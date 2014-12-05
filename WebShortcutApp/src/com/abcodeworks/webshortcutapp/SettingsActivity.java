@@ -47,7 +47,8 @@ import android.preference.PreferenceManager;
 public class SettingsActivity extends PreferenceActivity
                 implements Preference.OnPreferenceChangeListener
 {
-        protected Preference enableCreateShortcutPref = null;
+        protected Preference enableCreateShortcutPref = null,
+        		             enableLaunchUnknownShortcutPref = null;
         
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -76,6 +77,9 @@ public class SettingsActivity extends PreferenceActivity
                 
                 enableCreateShortcutPref = findPreference(getString(R.string.pref_enable_create_shortcut));
                 enableCreateShortcutPref.setOnPreferenceChangeListener(this);
+                
+                enableLaunchUnknownShortcutPref = findPreference(getString(R.string.pref_enable_launch_unknown_shortcut));
+                enableLaunchUnknownShortcutPref.setOnPreferenceChangeListener(this);
         }
 
 
@@ -85,9 +89,17 @@ public class SettingsActivity extends PreferenceActivity
          */
         public boolean onPreferenceChange(Preference preference, Object newValue)
         {
-                if(preference == enableCreateShortcutPref){
+                if(preference == enableCreateShortcutPref) {
                         Boolean enable = (Boolean) newValue;
                         setActivityEnabled(CreateShortcutActivity.class, enable);
+                } else if(preference == enableLaunchUnknownShortcutPref) {
+                	    Boolean enable = (Boolean) newValue;
+                	    Boolean invEnable = Boolean.valueOf(!enable.booleanValue());
+                	    setActivityEnabled(LaunchUnknownShortcutActivity.class, enable);
+                	    setActivityEnabled(LaunchUrlShortcutActivity.class, invEnable);
+                	    setActivityEnabled(LaunchWebsiteShortcutActivity.class, invEnable);
+                	    setActivityEnabled(LaunchDesktopShortcutActivity.class, invEnable);
+                	    setActivityEnabled(LaunchWeblocShortcutActivity.class, invEnable);
                 }
 
 

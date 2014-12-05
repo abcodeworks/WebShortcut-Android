@@ -21,18 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--activity
-            android:name="com.abcodeworks.webshortcutapp.LaunchDesktopShortcutActivity"
-            android:label="@string/title_open_shortcut" >
-            <intent-filter>
-			    <action android:name="android.intent.action.VIEW" />
-			    <category android:name="android.intent.category.DEFAULT" />
-			    <data android:mimeType="*/*" />
-			    <data android:scheme="file" />
-			    <data android:pathPattern=".*\\.desktop" />
-			    <data android:host="*" />
-  			</intent-filter>
-        </activity-->
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity"
             android:label="@string/title_open_shortcut" >
@@ -124,6 +112,16 @@
 			    <data android:host="*" />
   			</intent-filter>
   			<!-- I do not know of any MIME type for webloc files -->
+        </activity>
+        <activity
+            android:enabled="false"
+            android:name="com.abcodeworks.webshortcutapp.LaunchUnknownShortcutActivity"
+            android:label="@string/title_open_shortcut" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+  			</intent-filter>
         </activity>
         <!--activity
             android:name="com.abcodeworks.webshortcutapp.CreateShortcutActivity"
