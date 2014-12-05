@@ -2,7 +2,7 @@
 
     <string name="pref_enable_launch_unknown_shortcut">enable_launch_unknown_shortcut</string>
     <string name="pref_enable_launch_unknown_shortcut_title">Treat all files as shortcuts</string>
-    <string name="pref_enable_launch_unknown_shortcut_summary">Enables a \"Launch Shortcut\" option even if a file does not look like a shortcut.</string>
+    <string name="pref_enable_launch_unknown_shortcut_summary">Enables the \"Launch Shortcut\" option even if a file does not look like a shortcut.</string>
 
     <string name="pref_create_shortcut_type">create_shortcut_type</string>
     <string name="pref_create_shortcut_type_title">Type of shortcut to create</string>
