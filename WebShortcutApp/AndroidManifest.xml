@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.abcodeworks.webshortcutapp"
     android:versionCode="1"
-    android:versionName="0.1" >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -95,7 +95,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
 			    <data android:host="*" />
   			</intent-filter>
-  			<!-- I do not know of any MIME type for desktop files -->
+  			<!-- Is there a MIME type for desktop files? -->
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity"
@@ -115,7 +115,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
 			    <data android:host="*" />
   			</intent-filter>
-  			<!-- I do not know of any MIME type for webloc files -->
+  			<!-- Is there a MIME type for webloc files?  -->
         </activity>
         <activity
             android:enabled="false"
@@ -138,7 +138,7 @@
 			    <data android:mimeType="text/plain" />
   			</intent-filter>
         </activity>
-        <provider android:name="CachedFileProvider" android:authorities="com.abcodeworks.webshortcutapp.provider" android:grantUriPermissions="true"/>
+        <provider android:name="CachedFileProvider" android:authorities="@string/cached_file_provider_authority" android:grantUriPermissions="true"/>
     </application>
 
 </manifest>

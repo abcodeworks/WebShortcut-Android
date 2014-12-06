@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package com.abcodeworks.webshortcutapp;
 
 
@@ -31,20 +30,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 
-// Used https://github.com/intrications/intent-intercept/blob/master/IntentIntercept/src/uk/co/ashtonbrsc/intentexplode/Settings.java
+// Used the following file as a reference:
+// https://github.com/intrications/intent-intercept/blob/master/IntentIntercept/src/uk/co/ashtonbrsc/intentexplode/Settings.java
 
-
-/**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
 public class SettingsActivity extends PreferenceActivity
                 implements Preference.OnPreferenceChangeListener
 {
@@ -58,11 +46,11 @@ public class SettingsActivity extends PreferenceActivity
             PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
         }
         
+        // Activates or deactivates the specified activity
         protected void setActivityEnabled(Class<? extends Activity> activityClass, boolean enabled) {
             int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
             ComponentName component = new ComponentName(this, activityClass);
-
 
             getPackageManager().setComponentEnabledSetting(component, flag,
                 PackageManager.DONT_KILL_APP);
@@ -81,6 +69,8 @@ public class SettingsActivity extends PreferenceActivity
                 
                 defaultCreateShortcutTypePref = findPreference(getString(R.string.pref_default_create_shortcut_type));
                 defaultCreateShortcutTypePref.setOnPreferenceChangeListener(this);
+                
+                // Set the summary to indicate the current value
                 ListPreference listPref = (ListPreference)defaultCreateShortcutTypePref;
                 listPref.setSummary(listPref.getEntry());
         }
@@ -93,6 +83,13 @@ public class SettingsActivity extends PreferenceActivity
         public boolean onPreferenceChange(Preference preference, Object newValue)
         {
             if(preference == enableLaunchUnknownShortcutPref) {
+            	/* When this checkbox is checked, the "unknown" shortcut
+            	 * launcher is activated and the others are deactivated
+            	 * (and vice-versa if the checkbox is unchecked).
+            	 * Ideally we would still want to use the specific launchers
+            	 * if the file matches the pattern, but if we leave those
+            	 * active, we will get two icons in the chooser.
+            	 */
                 Boolean enable = (Boolean) newValue;
                 Boolean invEnable = Boolean.valueOf(!enable.booleanValue());
                 setActivityEnabled(LaunchUnknownShortcutActivity.class, enable);
@@ -101,8 +98,11 @@ public class SettingsActivity extends PreferenceActivity
                 setActivityEnabled(LaunchDesktopShortcutActivity.class, invEnable);
                 setActivityEnabled(LaunchWeblocShortcutActivity.class, invEnable);
             } else if(preference == defaultCreateShortcutTypePref) {
-            	// This could probably be cleaner.  Should we be using
-            	// onSharedPreferenceChanged instead?
+            	/* When the shortcut type is changed, update the
+            	 * summary to reflect the new value.
+            	 * This could probably be cleaner.  Should we be using
+            	 * onSharedPreferenceChanged instead of onPreferenceChange?
+            	 */
             	CharSequence newKey = (CharSequence)newValue;
             	ListPreference listPref = (ListPreference)defaultCreateShortcutTypePref;
             	int index = listPref.findIndexOfValue(newKey.toString());

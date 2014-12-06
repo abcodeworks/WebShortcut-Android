@@ -6,33 +6,26 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/filename_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_create_shortcut_filename_prompt"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/edit_filename"
+        android:id="@+id/dialog_create_shortcut_edit_filename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text" />
     
     <TextView
-        android:id="@+id/shortcut_type_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_create_shortcut_shortcut_type_prompt"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <!--View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>-->
 
     <Spinner
-        android:id="@+id/shortcut_type"
+        android:id="@+id/dialog_create_shortcut_shortcut_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/shortcut_type_titles"

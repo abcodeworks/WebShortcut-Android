@@ -21,4 +21,23 @@
         </intent>
     </Preference>
 
+    <Preference
+        android:key="sourcecode"
+        android:title="@string/pref_sourcecode_title" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_sourcecode_url" >
+        </intent>
+    </Preference>
+    
+    <Preference
+        android:key="license"
+        android:title="@string/pref_license_title"
+        android:summary="@string/pref_license_summary" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_license_url" >
+        </intent>
+    </Preference>
+
 </PreferenceScreen>

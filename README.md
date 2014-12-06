@@ -35,6 +35,10 @@ These tests should be manually performed:
 - Try changing the file name and shortcut type on the create shortcut dialog.
 - Make sure default create shortcut type setting works.
 
+Generate APK (Deployment)
+-------------------------
+Use the File | Export... option and choose "Export Android Application".
+
 Notes
 ------
 - Per the Android guidelines, there should be no debug logging.

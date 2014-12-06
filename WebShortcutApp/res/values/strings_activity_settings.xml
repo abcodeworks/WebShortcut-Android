@@ -8,6 +8,12 @@
     <string name="pref_default_create_shortcut_type_title">Default type when creating shortcut</string>
     
     <string name="pref_homepage_title">Homepage</string>
-    <string name="pref_homepage_url">http://play.google.com/store/apps/details?id=com.abcodeworks.webshortcut</string>
+    <string name="pref_homepage_url">http://play.google.com/store/apps/details?id=com.abcodeworks.webshortcutapp</string>
 
+    <string name="pref_sourcecode_title">Source Code</string>
+    <string name="pref_sourcecode_url">https://github.com/abcodeworks/WebShortcut-Android</string>
+
+    <string name="pref_license_title">License</string>
+    <string name="pref_license_summary">GPLv3</string>
+    <string name="pref_license_url">http://www.gnu.org/copyleft/gpl.html</string>
 </resources>

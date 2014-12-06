@@ -1,3 +1,22 @@
+/**
+ * Copyright 2014 by Andre Beckus
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.abcodeworks.webshortcutapp.test;
 
 import java.util.HashMap;
@@ -5,17 +24,17 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.preference.CheckBoxPreference;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.abcodeworks.webshortcutapp.LaunchDesktopShortcutActivity;
 import com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity;
 import com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity;
 import com.abcodeworks.webshortcutapp.LaunchWebsiteShortcutActivity;
-import com.abcodeworks.webshortcutapp.R;
 
+/*
+ * Tests that the intent filters work on the shortcut launchers
+ */
 public class LaunchShortcutIntentTest extends ActivityInstrumentationTestCase2<LaunchUrlShortcutActivity> {
 	public LaunchShortcutIntentTest() {
 		super(LaunchUrlShortcutActivity.class);
@@ -26,13 +45,15 @@ public class LaunchShortcutIntentTest extends ActivityInstrumentationTestCase2<L
 	protected void setUp() throws Exception {
         super.setUp();
         
+        // Make sure all activities are enabled, or this test will fail
         Context ctx = getInstrumentation().getTargetContext();
         activityStateMap = ShortcutTestHelper.getActivitiesEnabledState(ctx);
         ShortcutTestHelper.enableAllActivities(ctx);
     }
-	
+
 	protected void tearDown() throws Exception {
-        Context ctx = getInstrumentation().getTargetContext();
+        // Restore the original activity states
+		Context ctx = getInstrumentation().getTargetContext();
         ShortcutTestHelper.restoreActivitiesEnabledState(ctx, activityStateMap);
 		
 		super.tearDown();

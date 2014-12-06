@@ -1,6 +1,6 @@
 package com.abcodeworks.webshortcutapp;
 
-// Copied (with minor modifications from http://stephendnicholas.com/archives/974
+// Copied (with minor modifications from http://stephendnicholas.com/archives/974)
 // Per comments on website, this is licensed under MIT License.
  
 import java.io.File;
@@ -10,8 +10,10 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.provider.OpenableColumns;
 import android.util.Log;
  
 public class CachedFileProvider extends ContentProvider {
@@ -19,6 +21,7 @@ public class CachedFileProvider extends ContentProvider {
     private static final String CLASS_NAME = "CachedFileProvider";
  
     // The authority is the symbolic name for the provider class
+    // We should reference the strings xml, but getting the context is tricky...
     public static final String AUTHORITY = "com.abcodeworks.webshortcutapp.provider";
  
     // UriMatcher used to match against incoming requests
@@ -31,7 +34,7 @@ public class CachedFileProvider extends ContentProvider {
         // Add a URI to the matcher which will match against the form
         // 'content://com.stephendnicholas.gmailattach.provider/*'
         // and return 1 in the case that the incoming Uri matches this pattern
-        uriMatcher.addURI(AUTHORITY, "*", 1);
+        uriMatcher.addURI(AUTHORITY, "shareshortcuts/*", 1);
  
         return true;
     }
@@ -42,11 +45,11 @@ public class CachedFileProvider extends ContentProvider {
  
         String LOG_TAG = CLASS_NAME + " - openFile";
  
-        Log.v(LOG_TAG,
-                "Called with uri: '" + uri + "'." + uri.getPath()/*uri.getLastPathSegment()*/);
+        //Log.v(LOG_TAG,
+        //        "Called with uri: '" + uri + "'." + uri.getPath()/*uri.getLastPathSegment()*/);
  
         // Check incoming Uri against the matcher
-        switch (1/*uriMatcher.match(uri)*/) {
+        switch (uriMatcher.match(uri)) { 
  
         // If it returns 1 - then it matches the Uri defined in onCreate
         case 1:
@@ -56,7 +59,7 @@ public class CachedFileProvider extends ContentProvider {
             // E.g.
             // 'content://com.stephendnicholas.gmailattach.provider/Test.txt'
             // Take this and build the path to the file
-            String fileLocation = getContext().getCacheDir() + File.separator
+            String fileLocation = getContext().getCacheDir() 
                     + uri.getPath()/*uri.getLastPathSegment())*/;
             
             Log.v(LOG_TAG,
@@ -97,14 +100,58 @@ public class CachedFileProvider extends ContentProvider {
         return null;
     }
  
+    /*
     @Override
     public String getType(Uri uri) {
         return null;
     }
- 
+    
     @Override
     public Cursor query(Uri uri, String[] projection, String s, String[] as1,
             String s1) {
         return null;
     }
+    */
+    
+    /* The following code is from the comments section in:
+     * http://stephendnicholas.com/archives/974(non-Javadoc)
+     */
+    @Override
+    public String getType(Uri uri) {
+        switch (uriMatcher.match(uri)) {
+            // If it returns 1 - then it matches the Uri defined in onCreate
+            case 1:
+            	// We should use the specific mime type for our shortcut.
+            	// But this is easier...
+                return "application/octet-stream";
+                default:
+            return null;
+        }
+    }
+
+    @Override
+    public Cursor query(Uri uri, String[] arg1, String arg2, String[] arg3, String arg4) {
+        switch (uriMatcher.match(uri)) {
+            // If it returns 1 - then it matches the Uri defined in onCreate
+            case 1:
+                MatrixCursor cursor = null;
+
+                File file = new File( getContext().getCacheDir() + File.separator
+                                      + uri.getLastPathSegment());
+                if (file.exists()) {
+                    cursor = new MatrixCursor(new String[] {
+                        OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE });
+                        cursor.addRow(new Object[] {
+                        		uri.getLastPathSegment(),
+                                file.length()
+                        } );
+                }
+
+	            return cursor;
+
+            default:
+                return null;
+        }
+    }
+
 }
