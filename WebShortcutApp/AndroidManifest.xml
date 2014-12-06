@@ -4,14 +4,140 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="21" />
 
+    <!-- When we match the extensions, should we only use scheme file?  Or should we include content too?
+         If I remove the "<data android:scheme="file"/>" tag, the unit tests fail. -->
+    <!-- The path patterns have repeats because they have to account for multiple periods.
+         For example, Google Drive includes several periods in its path when opening a file.
+         See http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.SettingsActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity"
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+			    <data android:scheme="file" />
+			    <data android:pathPattern=".*\\.url" />
+			    <data android:pathPattern=".*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
+			    <data android:host="*" />
+  			</intent-filter>
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="text/x-url" />
+			    <data android:host="*" />
+  			</intent-filter>
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.LaunchWebsiteShortcutActivity"
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+			    <data android:scheme="file" />
+			    <data android:pathPattern=".*\\.website" />
+			    <data android:pathPattern=".*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.website"/>
+			    <data android:host="*" />
+  			</intent-filter>
+  			<intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="application/x-mswebsite" />
+			    <data android:host="*" />
+  			</intent-filter>
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.LaunchDesktopShortcutActivity"
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+			    <data android:scheme="file" />
+			    <data android:pathPattern=".*\\.desktop" />
+			    <data android:pathPattern=".*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+			    <data android:host="*" />
+  			</intent-filter>
+  			<!-- Is there a MIME type for desktop files? -->
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity"
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+			    <data android:scheme="file" />
+			    <data android:pathPattern=".*\\.webloc" />
+			    <data android:pathPattern=".*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
+			    <data android:host="*" />
+  			</intent-filter>
+  			<!-- Is there a MIME type for webloc files?  -->
+        </activity>
+        <activity
+            android:enabled="false"
+            android:name="com.abcodeworks.webshortcutapp.LaunchUnknownShortcutActivity"
+            android:label="@string/title_open_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="*/*" />
+  			</intent-filter>
+        </activity>
+        <activity
+            android:name="com.abcodeworks.webshortcutapp.CreateShortcutActivity"
+            android:label="@string/title_share_shortcut"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+			    <action android:name="android.intent.action.SEND" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="text/plain" />
+  			</intent-filter>
+        </activity>
+        <provider android:name="CachedFileProvider" android:authorities="@string/cached_file_provider_authority" android:grantUriPermissions="true"/>
     </application>
 
 </manifest>

@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_enable_launch_unknown_shortcut"
+        android:title="@string/pref_enable_launch_unknown_shortcut_title"
+        android:summary="@string/pref_enable_launch_unknown_shortcut_summary" />
+    
+    <ListPreference 
+       android:key="@string/pref_default_create_shortcut_type"
+       android:title="@string/pref_default_create_shortcut_type_title"
+       android:entries="@array/shortcut_type_titles"
+       android:entryValues="@array/shortcut_type_keys" />
+    
+    <Preference
+        android:key="homepage"
+        android:title="@string/pref_homepage_title" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_homepage_url" >
+        </intent>
+    </Preference>
+
+    <Preference
+        android:key="sourcecode"
+        android:title="@string/pref_sourcecode_title" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_sourcecode_url" >
+        </intent>
+    </Preference>
+    
+    <Preference
+        android:key="license"
+        android:title="@string/pref_license_title"
+        android:summary="@string/pref_license_summary" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/pref_license_url" >
+        </intent>
+    </Preference>
+
+</PreferenceScreen>

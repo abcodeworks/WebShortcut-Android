@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="shortcut_type_titles">
+        <item>Windows (.url)</item>
+        <item>Linux (.desktop)</item>
+        <item>Apple (.webloc)</item>
+    </string-array>
+    
+    <string-array name="shortcut_type_keys">
+        <item>url</item>
+        <item>desktop</item>
+        <item>webloc</item>
+    </string-array>
+</resources>

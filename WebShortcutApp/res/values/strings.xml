@@ -1,5 +1,13 @@
 <resources>
 
     <string name="app_name">Web Shortcut</string>
+    <string name="title_open_shortcut">Launch Shortcut</string>
+    <string name="title_share_shortcut">Create Shortcut</string>
+    <string name="msg_no_app_for_share">There are no applications installed to share with.</string>
+    <string name="msg_error_opening_unknown_shortcut">Error reading shortcut</string>
+    <string name="msg_no_intent_extra_subject">Error creating shortcut - Name not found</string>
+    <string name="msg_no_intent_extra_text">Error creating shortcut - URL not found</string>
+    
+    <string name="cached_file_provider_authority">com.abcodeworks.webshortcutapp.provider</string>
 
 </resources>
