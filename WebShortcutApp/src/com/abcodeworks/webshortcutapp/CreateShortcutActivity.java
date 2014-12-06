@@ -276,7 +276,13 @@ public class CreateShortcutActivity extends Activity {
 					    	}
 			            }
 			         })
-			         .setNegativeButton(R.string.dialog_create_shortcut_negative_button, null) // If canceled, do nothing
+			         .setNegativeButton(R.string.dialog_create_shortcut_negative_button, new DialogInterface.OnClickListener() {
+				        	// Handler for when the user clicks the create button.
+				            public void onClick(DialogInterface dialog, int which) { 
+				            	// If canceled, just clean up
+				            	thisActivity.finish();
+				            }
+				         })
 			         .create();
 	    	} catch(Exception e) {
 	    		Log.e("WebShortcutApp", e.toString());
