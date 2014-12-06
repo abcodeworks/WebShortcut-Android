@@ -94,7 +94,12 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
 			    <data android:host="*" />
   			</intent-filter>
-  			<!-- Is there a MIME type for desktop files? -->
+  			<intent-filter>
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="application/x-desktop" />
+			    <data android:host="*" />
+  			</intent-filter>
         </activity>
         <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchWeblocShortcutActivity"

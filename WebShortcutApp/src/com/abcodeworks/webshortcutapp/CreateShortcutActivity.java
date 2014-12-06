@@ -230,7 +230,7 @@ public class CreateShortcutActivity extends Activity {
 					    		mimeType = "text/x-url";
 					    		writer = new UrlShortcutWriter();
 					    	} else if(shortcutType.equals("desktop")) {
-					    		mimeType = "application/octet-stream";
+					    		mimeType = "application/x-desktop";
 					    		writer = new DesktopShortcutWriter();
 					    	} else if(shortcutType.equals("webloc")) {
 					    		mimeType = "application/octet-stream";
