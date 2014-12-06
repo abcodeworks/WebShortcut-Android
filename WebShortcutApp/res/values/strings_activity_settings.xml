@@ -7,6 +7,9 @@
     <string name="pref_default_create_shortcut_type">default_create_shortcut_type</string>
     <string name="pref_default_create_shortcut_type_title">Default type when creating shortcut</string>
     
+    <string name="pref_app_version">app_version</string>
+    <string name="pref_app_version_title">Application Version</string>
+    
     <string name="pref_homepage_title">Homepage</string>
     <string name="pref_homepage_url">http://play.google.com/store/apps/details?id=com.abcodeworks.webshortcutapp</string>
 

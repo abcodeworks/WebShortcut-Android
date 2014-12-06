@@ -13,6 +13,11 @@
        android:entryValues="@array/shortcut_type_keys" />
     
     <Preference
+        android:key="@string/pref_app_version"
+        android:title="@string/pref_app_version_title" >
+    </Preference>
+    
+    <Preference
         android:key="homepage"
         android:title="@string/pref_homepage_title" >
         <intent
