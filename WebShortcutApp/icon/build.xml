@@ -1,0 +1,224 @@
+<project name="icons" default="all_icons">
+  <description>
+      Builds the icons for the application. The Android icons are put directly in
+  	  their respective folders in the project.
+
+  	  This also builds icons for Linux and Windows.  they are placed in a folder named
+  	  final.  There are no longer plans to use these icons, but they will be left
+  	  in place in case they are needed in the future (they probably shouldn't be kept
+  	  in the Android project, but it does not seem worthwhile to split them off). 
+
+  	  It is assumed that imagemagick, inkscape, and optipng are installed.
+      To install these on Ubuntu: sudo apt-get install imagemagick inkscape optipng
+
+  	  We use the default PNG format.  We will assume that all of the resulting images
+	  are in the proper PNG format (i.e. PNG32).
+  </description>
+
+  <!-- Create the temporary directory -->
+  <target name="tmp_dir">
+      <mkdir dir="tmp"/>
+  </target>
+  
+  <!-- Create the final directory -->
+  <target name="final_dir">
+      <mkdir dir="final"/>
+      <mkdir dir="final/linux"/>
+      <mkdir dir="final/windows"/>
+  </target>
+
+  
+  <!-- Create a bitmap image from the vector image.
+       Make the image large so that there is some room
+       to work without degradation -->
+  <target name="webshortcut_png" depends="tmp_dir">
+      <exec executable="inkscape">
+          <arg value="-z"/>
+          <arg value="-e"/>
+          <arg value="tmp/webshortcut.png"/>
+          <arg value="-w 1024"/>
+          <arg value="-h 1024"/>
+	  <arg value="gnome_icon/edited/webshortcut.svg"/>
+      </exec>
+  </target>
+  
+  <!-- Crop the icon.
+       The 1024x1024 icon has the following metrics:
+         Blank space top    = 60
+         Blank space bottom = 94
+         Blank space left   = 68
+         Blank space right  = 86
+         non-blank area Size X = 1024 - 68 - 86 = 870
+         non-blank area Size Y = 1024 - 60 - 94 = 870
+
+       The design guidelines (http://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html)
+       use an example padding of 4 pixels on each side of a 96 x 96 image. That is roughly 4% of the image on each side
+       for a total of 8% total in each direction.  This means the image size needs to be approximately 109% larger than
+       the contents in each direction.  So these are the measurements of the final icon:
+         total Size X = 1.09 * 870 = 948  
+         total Size Y = 1.09 * 870 = 948
+         Padding top    = 0.04 * 948 = 38
+         Padding bottom = 0.04 * 948 = 38
+
+       And this is where we need to start cropping the 1024X1024 icon:
+         Start X = 68 - 38 = 30
+         Start Y = 60 - 38 = 22
+  -->
+  <target name="webshortcut_cropped_png" depends="webshortcut_png">
+      <exec executable="convert">
+          <arg value="tmp/webshortcut.png"/>
+          <arg value="-crop"/>
+          <arg value="948x948+30+22"/>
+          <arg value="tmp/webshortcut_cropped.png"/>
+      </exec>
+  </target>
+
+  
+  <!-- Define a macro which does the following:
+       1) Resize the icon to the specified size.
+       2) Compress the resulting PNG (per the guide icon design guide:
+       http://developer.android.com/guide/practices/ui_guidelines/icon_design.html)-->
+  <macrodef name="resize_and_optimize">
+    <attribute name="src-filename"/>
+    <attribute name="new-filename"/>
+    <attribute name="new-size"/>
+    <sequential>
+      <exec executable="convert">
+          <arg value="@{src-filename}"/>
+          <arg value="-resize"/>
+          <arg value="@{new-size}x@{new-size}"/>
+          <arg value="@{new-filename}"/>
+      </exec>
+      <exec executable="optipng">
+          <arg value="@{new-filename}" />
+      </exec>
+    </sequential>
+  </macrodef>
+
+
+  <!-- Creates the Linux icon - no further editing is required, so
+       just copy the file. -->
+  <target name="linux_webshortcut_svg" depends="final_dir">
+    <copy file="gnome_icon/edited/webshortcut.svg"
+          tofile="final/linux/webshortcut.svg"/>
+  </target>
+
+	
+  <!-- Create the feature graphic for Android marketplace.
+	   This has a wide size.  First we resize the icon and
+	   place it in the middle of a 1024x500 image.
+	   Then we create the final image with a white background
+	   and no transparency.  Per the Android guidelines this is
+	   supposed to be a 24-bit PNG.  Do we need to do further
+	   conversions to achieve this???  See:
+	   https://support.google.com/googleplay/android-developer/answer/1078870?hl=en -->
+  <target name="ic_launcher-feature" depends="webshortcut_cropped_png">
+    <sequential>
+      <exec executable="convert">
+        <arg value="tmp/webshortcut_cropped.png"/>
+        <arg value="-background"/>
+        <arg value="white"/>
+        <arg value="-resize"/>
+        <arg value="500x500"/>
+        <arg value="-gravity"/>
+        <arg value="center"/>
+        <arg value="-extent"/>
+        <arg value="1024x500"/>      	
+        <arg value="../ic_launcher-feature.png"/>
+	  </exec>
+      <exec executable="optipng">
+        <arg value="../ic_launcher-feature.png" />
+      </exec>
+	</sequential>
+  </target>
+	
+  
+  <!-- Create the various icon sizes needed for the Android app. -->
+  <target name="ic_launcher-web" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="../ic_launcher-web.png"
+                           new-size="512" />
+  </target>
+
+  <target name="xxhdpi_ic_launcher" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="../res/drawable-xxhdpi/ic_launcher.png"
+               new-size="144" />
+  </target>
+	
+  <target name="xhdpi_ic_launcher" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="../res/drawable-xhdpi/ic_launcher.png"
+			   new-size="96" />
+  </target>
+
+  <target name="hdpi_ic_launcher" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="../res/drawable-hdpi/ic_launcher.png"
+			   new-size="72" />
+  </target>
+
+  <target name="mdpi_ic_launcher" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="../res/drawable-mdpi/ic_launcher.png"
+			   new-size="48" />
+  </target>
+  
+  <!-- The default target which builds all of the required Android icons -->
+  <target name="all_ic_launchers" depends="ic_launcher-web, xxhdpi_ic_launcher, xhdpi_ic_launcher, hdpi_ic_launcher, mdpi_ic_launcher, ic_launcher-feature"/>
+
+  
+  <!-- Create the various icon sizes needed for the Windows ICO file.
+       See http://stackoverflow.com/questions/3236115/which-icon-sizes-should-my-windows-applications-icon-include -->
+  <target name="windows_16" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="tmp/windows_16.png"
+			   new-size="16" />
+  </target>
+
+  <target name="windows_32" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="tmp/windows_32.png"
+			   new-size="32" />
+  </target>
+
+  <target name="windows_48" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="tmp/windows_48.png"
+			   new-size="48" />
+  </target>
+
+  <target name="windows_64" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="tmp/windows_64.png"
+			   new-size="64" />
+  </target>
+
+  <target name="windows_128" depends="webshortcut_cropped_png">
+      <resize_and_optimize src-filename="tmp/webshortcut_cropped.png"
+                           new-filename="tmp/windows_128.png"
+			   new-size="128" />
+  </target>
+  
+  <!-- Builds the Windows ICO file. -->
+  <target name="windows_ico" depends="windows_16, windows_32, windows_48, windows_64, windows_128">
+    <exec executable="convert">
+      <arg value="tmp/windows_16.png"/>
+      <arg value="tmp/windows_32.png"/>
+      <arg value="tmp/windows_48.png"/>
+      <arg value="tmp/windows_64.png"/>
+      <arg value="tmp/windows_128.png"/>
+      <arg value="final/windows/webshortcut.ico"/>
+    </exec>
+  </target>
+
+  
+  
+  <!-- The default target which builds all of the required icons -->
+  <target name="all_icons" depends="linux_webshortcut_svg, all_ic_launchers, windows_ico"/>
+    
+  <target name="clean">
+      <delete dir="tmp"/>
+      <delete dir="final"/>
+  </target>
+</project>

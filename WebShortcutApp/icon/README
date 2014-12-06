@@ -1,0 +1,37 @@
+This folder contains a script to build the icons necessary for the application.
+The contents of this folder are as follows:
+  build.xml
+    Builds the icons.  The results are placed in a new "final" folder.  See
+    inside the build file for dependencies.
+
+  shortcut_icon_examples/
+    Contains examples of icons from various operating system - used for reference.
+    
+  gnome_icon/original/
+    Contains the original Gnome icons used to build the app icon.
+    These are licensed under GPL.
+
+    Emblem-symbolic-link.svg:
+      Downloaded from:
+      http://commons.wikimedia.org/wiki/File:Emblem-symbolic-link.svg
+
+    Gnome-emblem-symbolic-link.svg:
+      Downloaded from:
+      http://commons.wikimedia.org/wiki/File:Gnome-emblem-web.svg
+    
+    Gnome-emblem-web.svg:
+      Downloaded from:
+      http://commons.wikimedia.org/wiki/File:Gnome-emblem-web.svg
+
+  gnome_icon/edited/
+    Contains edited Gnome icons.
+    
+    Emblem-symbolic-link_black.svg:
+      Copy of Emblem-symbolic-link.svg with arrow colored black.
+    
+    Emblem-symbolic-link_black_shadow_removed.svg:
+      Copy of Emblem-symbolic-link_black.svg with shadow removed.
+    
+    webshortcut.svg:
+      Globe with symbolic link icon overlayed (in a different layer).
+      This was created manually using Inkscape.
