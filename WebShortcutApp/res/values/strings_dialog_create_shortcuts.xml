@@ -1,7 +1,7 @@
 <resources>
 
     <string name="dialog_create_shortcut_title">Create Shortcut</string>
-    <string name="dialog_create_shortcut_filename_prompt">Please enter the file name:</string>
+    <string name="dialog_create_shortcut_filename_prompt">File name:</string>
     <string name="dialog_create_shortcut_shortcut_type_prompt">Shortcut type:</string>
     <string name="dialog_create_shortcut_positive_button">Create</string>
     <string name="dialog_create_shortcut_negative_button">Cancel</string>
