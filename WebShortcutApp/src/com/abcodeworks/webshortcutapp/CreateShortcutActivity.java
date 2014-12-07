@@ -114,12 +114,6 @@ public class CreateShortcutActivity extends Activity {
 	    		/* Get the information from the intent. */
 		    	//Log.i("WebShortcut", "Got send intent...");
 		    	Bundle extras = intent.getExtras();
-		    	final String originalName = extras.getString(Intent.EXTRA_SUBJECT);
-		    	if(originalName == null) {
-		    		Toast.makeText(this, getString(R.string.msg_no_intent_extra_subject), Toast.LENGTH_LONG).show();
-		    		finish();
-		    		return;
-		    	}
 		    	
 		    	final String url = extras.getString(Intent.EXTRA_TEXT);
 		    	if(url == null) {
@@ -127,6 +121,12 @@ public class CreateShortcutActivity extends Activity {
 		    		finish();
 		    		return;
 		    	}
+		    	
+		    	// Get the title - use the url if there is not title.
+		    	String subject = extras.getString(Intent.EXTRA_SUBJECT);
+		    	final String originalName = (subject == null) ? url : subject;
+		    	
+
 		    	//Log.i("WebShortcut", "received TEXT: " + extras.getString(Intent.EXTRA_TEXT));
 		    	//Log.i("WebShortcut", "received SUBJECT: " + extras.getString(Intent.EXTRA_SUBJECT));
 		    	
@@ -271,6 +271,7 @@ public class CreateShortcutActivity extends Activity {
 					    	/* Send the intent */
 					    	try {
 					    		startActivity(sendIntent);
+					    		thisActivity.finish();
 					    	} catch(ActivityNotFoundException e) {
 					    		Toast.makeText(thisActivity, getString(R.string.msg_no_app_for_share), Toast.LENGTH_LONG).show();
 					    	}
@@ -283,12 +284,20 @@ public class CreateShortcutActivity extends Activity {
 				            	thisActivity.finish();
 				            }
 				         })
+				     // It appears this is called when the back button is pressed while on the dialog
+				     .setOnCancelListener(new DialogInterface.OnCancelListener() {                   
+                            @Override
+                            public void onCancel(DialogInterface dialog) 
+                            {
+                            	// If canceled, just clean up
+        	                    thisActivity.finish();                        
+
+                            }
+                         })
 			         .create();
 	    	} catch(Exception e) {
 	    		Log.e("WebShortcutApp", e.toString());
 	    	}
 	    }
-
-		//finish();
 	}
 }

@@ -32,6 +32,9 @@ These tests should be manually performed:
 - Enable the "treat all files as shortcuts".
   Retry viewing URL, Desktop, and Webloc shortcuts.
 - Try creating URL, Desktop, and Webloc shortcuts.
+- Try hitting the back button at various points in the
+  shortcut creation dialog sequence.
+- Try hitting the cancel button on the shortcut creation dialog.
 - Try changing the file name and shortcut type on the create shortcut dialog.
 - Make sure default create shortcut type setting works.
 
