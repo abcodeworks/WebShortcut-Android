@@ -1,0 +1,27 @@
+I will try to keep this up to date with what is in the store listing
+just for backup purposes.
+
+TITLE
+Web Shortcut
+
+SHORT DESCRIPTION
+Launches and creates web shortcuts used by various operating systems
+
+FULL DESCRIPTION
+This application allows you to:
+1) Launch web shortcuts created by Windows, Linux, or Apple/Max/OSX.  Web shortcuts are the files created when you save a link to a webpage on a PC.
+2) Create a web shortcut file from your Android web browser.  The shortcut can be opened by Windows, Linux, or Apple/Max/OSX.
+
+Typical scenarios:
+1) You are web surfing on your PC and find a website that you would like to save.  You create a shortcut file by dragging the webpage into a folder on your PC.  You place that file into your favorite cloud service (Dropbox, Google Drive, Skydrive, etc.) so that you can share it with your other devices.  You try to open the file on your Android device, but find that Android does not know how to handle the file.  This is where Web Shortcut comes in.  When you open the file, you will be given the option to launch the shortcut.  When you do so, the shortcut will open up in the web browser.
+2) You are web surfing on your Android device.  You want to save a link to a webpage, but your only option is to bookmark it.  However, you want to save the link as a file so that you can open it on your PC.  With Web Shortcut, when you share the website in your Android browser, you will be given the option to create and share a shortcut file.
+
+
+CATEGORIZATION
+Type: Applications
+Category: Productivity
+Content rating: Everyone
+
+CONTACT DETAILS
+Website: http://github.com/abcodeworks
+Email: webshortcut@abcodeworks.com
