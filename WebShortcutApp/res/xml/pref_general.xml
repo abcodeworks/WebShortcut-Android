@@ -7,6 +7,7 @@
         android:summary="@string/pref_enable_launch_unknown_shortcut_summary" />
     
     <ListPreference 
+       android:defaultValue="url"
        android:key="@string/pref_default_create_shortcut_type"
        android:title="@string/pref_default_create_shortcut_type_title"
        android:entries="@array/shortcut_type_titles"
