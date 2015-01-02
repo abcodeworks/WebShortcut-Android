@@ -233,7 +233,7 @@ public class CreateShortcutActivity extends Activity {
 					    		mimeType = "application/x-desktop";
 					    		writer = new DesktopShortcutWriter();
 					    	} else if(shortcutType.equals("webloc")) {
-					    		mimeType = "application/octet-stream";
+					    		mimeType = "application/x-webloc";
 					    		writer = new WeblocBinaryShortcutWriter();
 					    	} else {
 					    		Log.e("WebShortcutApp", "Invalid shortcut type");
