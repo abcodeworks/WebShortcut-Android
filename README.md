@@ -46,6 +46,8 @@ Notes
 ------
 - Per the Android guidelines, there should be no debug logging.
   Since this is a small project, I chose to just comment them out.
+- The icons are built using a script located in:
+  https://github.com/beckus/WebShortcutUtil
 
 Libraries and Licenses
 ----------------------
