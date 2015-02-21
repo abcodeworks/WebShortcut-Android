@@ -45,6 +45,8 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.url"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.url"/>
 			    <data android:host="*" />
   			</intent-filter>
             <intent-filter>
@@ -70,6 +72,8 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.website"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.website"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.website"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.website"/>
 			    <data android:host="*" />
   			</intent-filter>
   			<intent-filter>
@@ -95,6 +99,8 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.desktop"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.desktop"/>
 			    <data android:host="*" />
   			</intent-filter>
   			<intent-filter>
@@ -120,6 +126,8 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.webloc"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.webloc"/>
 			    <data android:host="*" />
   			</intent-filter>
   			<intent-filter>
