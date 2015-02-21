@@ -40,16 +40,16 @@ abstract public class LaunchShortcutActivity extends Activity {
 		PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 		
 		Intent intent = getIntent();
-		Log.i("WebShortcut", "In Activity");
+		//Log.i("WebShortcut", "In Activity");
 	    if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 	    	try {
-		    	Log.i("WebShortcut", "Got view intent...");
+		    	//Log.i("WebShortcut", "Got view intent...");
 		    	ContentResolver resolver = getContentResolver();
 		    	Uri uri = intent.getData();
 		    	InputStream instream = resolver.openInputStream(uri);
 		    	ShortcutReader reader = getShortcutReader();
 		    	String url = reader.readUrlString(instream);
-		    	Log.i("WebShortcut", "URL: " + url);
+		    	//Log.i("WebShortcut", "URL: " + url);
 		    	Uri uriUrl = Uri.parse(url);
 		        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);  
 		        startActivity(launchBrowser);
