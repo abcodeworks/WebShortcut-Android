@@ -13,6 +13,11 @@ FULL DESCRIPTION
 2) Create a web shortcut file from your Android web browser.  The shortcut can be opened by Windows, Linux, or Apple/Max/OSX.
 
 
+<b>Typical scenarios:</b>
+1) You are web surfing on your PC and find a website that you would like to save.  You create a shortcut file by dragging the webpage into a folder on your PC.  You place that file into your favorite cloud service (Dropbox, Google Drive, Skydrive, etc.) so that you can share it with your other devices.  You try to open the file on your Android device, but find that Android does not know how to handle the file.  This is where Web Shortcut comes in.  When you open the file, you will be given the option to launch the shortcut.  When you do so, the shortcut will open up in the web browser.
+2) You are web surfing on your Android device.  You want to save a link to a webpage, but your only option is to bookmark it.  However, you want to save the link as a file so that you can open it on your PC.  With Web Shortcut, when you share the website in your Android browser, you will be given the option to create and share a shortcut file.
+
+
 <b>Instructions</b>
 To launch a shortcut file:
 1) Find the shortcut file.  You will need to do this using another app (such as Dropbox, Google Drive, or Downloads)
@@ -34,13 +39,8 @@ To change preferences:
 1) Open the Web Shortcut app directly to get the preferences screen.  Note that you cannot launch or create shortcuts from within this screen - it is only for changing preferences.
 
 
-<b>Typical scenarios:</b>
-1) You are web surfing on your PC and find a website that you would like to save.  You create a shortcut file by dragging the webpage into a folder on your PC.  You place that file into your favorite cloud service (Dropbox, Google Drive, Skydrive, etc.) so that you can share it with your other devices.  You try to open the file on your Android device, but find that Android does not know how to handle the file.  This is where Web Shortcut comes in.  When you open the file, you will be given the option to launch the shortcut.  When you do so, the shortcut will open up in the web browser.
-2) You are web surfing on your Android device.  You want to save a link to a webpage, but your only option is to bookmark it.  However, you want to save the link as a file so that you can open it on your PC.  With Web Shortcut, when you share the website in your Android browser, you will be given the option to create and share a shortcut file.
-
-
 <b>Known Issues</b>
-- If you create a shortcut with an international URL (i.e. with non-ASCII characters in the URL), it may not open properly.  This happens with .webloc files on Mac OSX PCs, and with .url files on Windows PCs.
+- If you create a shortcut with an international URL (i.e. with non-ASCII characters in the URL), it may not open properly.  In particular, this happens with .webloc files on Mac OSX PCs.
 - You may not get the option to launch shortcut files if they have a lot of periods in the name.  This is because of the way in which Android filters files by extension.  As a workaround, you can enable the "Treat all files as shortcuts" option in preferences.
 
 
