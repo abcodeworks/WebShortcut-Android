@@ -27,6 +27,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.abcodeworks.webshortcutapp.InstructionsActivity">
+        </activity>
+        <activity
             android:name="com.abcodeworks.webshortcutapp.LaunchUrlShortcutActivity"
             android:label="@string/title_open_shortcut"
             android:theme="@android:style/Theme.NoDisplay" >

@@ -1,5 +1,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
+
+    <Preference
+        android:key="@string/pref_instructions"
+        android:title="@string/pref_instructions_title" >
+        
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.abcodeworks.webshortcutapp"
+            android:targetClass="com.abcodeworks.webshortcutapp.InstructionsActivity">
+        </intent>
+    </Preference>
+
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="@string/pref_enable_launch_unknown_shortcut"

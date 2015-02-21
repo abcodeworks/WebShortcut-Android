@@ -6,6 +6,9 @@
 
     <string name="pref_default_create_shortcut_type">default_create_shortcut_type</string>
     <string name="pref_default_create_shortcut_type_title">Default type when creating shortcut</string>
+
+    <string name="pref_instructions">pref_instructions</string>
+    <string name="pref_instructions_title">Instructions</string>
     
     <string name="pref_app_version">app_version</string>
     <string name="pref_app_version_title">Application Version</string>
