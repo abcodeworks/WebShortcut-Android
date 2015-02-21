@@ -9,16 +9,18 @@
     
     <string name="cached_file_provider_authority">com.abcodeworks.webshortcutapp.provider</string>
 
-    <!-- See http://stackoverflow.com/questions/3150400/html-list-tag-not-working-in-android-textview-what-can-i-do -->
+    <!-- See http://stackoverflow.com/questions/3150400/html-list-tag-not-working-in-android-textview-what-can-i-do 
+         Note that we have to escape the ampersands in the quote escapes - this is creating a "double" escape. The ampersand
+         escape is for this xml file and the quote escape is for the html interpreter. -->
     <string name="instructions_html">
 &lt;h1&gt;Instructions&lt;/h1&gt;
 &lt;p&gt;
 &lt;h2&gt;To launch a shortcut file&lt;/h2&gt;
 &lt;big&gt;
-1) Find the shortcut file.  You will need to do this using another app (such as Dropbox, Google Drive, or Downloads)
+1) Find the shortcut file.  You will need to do this using another app (such as Dropbox, Google Drive, or Downloads).
    You cannot open the shortcut from within the Web Shortcut app.&lt;br/&gt;
 2) Open the shortcut file.&lt;br/&gt;
-3) When presented with the "Open With" dialog box, select "Launch Shortcut".&lt;br/&gt;
+3) When presented with the &amp;quot;Open With&amp;quot; dialog box, select &amp;quot;Launch Shortcut&amp;quot;.&lt;br/&gt;
 4) If you have multiple web browsers installed, you will need to choose which one to use.&lt;br/&gt;
 5) The URL will be extracted from the shortcut file and opened in your web browser.&lt;br/&gt;
 &lt;/big&gt;
@@ -28,11 +30,11 @@
 &lt;h2&gt;To create a shortcut file&lt;/h2&gt;
 &lt;big&gt;
 1) Open a web page in your web browser.&lt;br/&gt;
-2) Select to "Share" the web page.&lt;br/&gt;
-3) When presented with the "Share via" dialog box, select "Create Shortcut".&lt;br/&gt;
+2) Select to &amp;quot;Share&amp;quot; the web page.&lt;br/&gt;
+3) When presented with the &amp;quot;Share via&amp;quot; dialog box, select &amp;quot;Create Shortcut&amp;quot;.&lt;br/&gt;
 4) You will be prompted for the file name (a default file name will already be entered) and the shortcut type.
-   Make any changes you wish and press the "Create" button.&lt;br/&gt;
-5) When presented with the "Complete action using" dialog box, select where you would like to send the shortcut file.&lt;br/&gt;
+   Make any changes you wish and press the &amp;quot;Create&amp;quot; button.&lt;br/&gt;
+5) When presented with the &amp;quot;Complete action using&amp;quot; dialog box, select where you would like to send the shortcut file.&lt;br/&gt;
 &lt;/big&gt;
 &lt;/p&gt;
 
