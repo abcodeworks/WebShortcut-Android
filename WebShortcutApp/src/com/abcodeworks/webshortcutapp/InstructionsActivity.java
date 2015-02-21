@@ -3,6 +3,7 @@ package com.abcodeworks.webshortcutapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class InstructionsActivity extends Activity {
@@ -15,5 +16,6 @@ public class InstructionsActivity extends Activity {
         mTextview.setText(
                Html.fromHtml(
                    getString(R.string.instructions_html)));
+        mTextview.setMovementMethod(new ScrollingMovementMethod());
     }
 }
